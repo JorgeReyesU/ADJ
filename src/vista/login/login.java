@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista.router;
+package vista.login;
 
+import vista.admin.router;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -107,7 +108,9 @@ public class login extends javax.swing.JFrame {
         } else{
             if(userAccount.getAccPass().equals(passMD5)){
                 if (userAccount.getEmpDni().getEmpCargo().equals("admin")) {
-                    // Ruta para modulo Admin
+                    router window = new router();
+                    window.setVisible(true);
+                    this.dispose();
                 }else if (userAccount.getEmpDni().getEmpCargo().equals("seller")) {
                     // Ruta para modulo Seller
                 }else if (userAccount.getEmpDni().getEmpCargo().equals("worker")) {
