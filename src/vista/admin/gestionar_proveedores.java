@@ -5,17 +5,31 @@
  */
 package vista.admin;
 
+import java.awt.Dimension;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Proveedores;
+import persistencia.ProveedoresJpaController;
+
 /**
  *
  * @author reyes
  */
 public class gestionar_proveedores extends javax.swing.JFrame {
 
+    ProveedoresJpaController cProveedores = new ProveedoresJpaController();
+    Proveedores cEdit;
+    
     /**
      * Creates new form gestionar_proveedores
      */
     public gestionar_proveedores() {
         initComponents();
+        this.setMinimumSize(new Dimension(1400, 680));
+        this.setLocationRelativeTo(null);
+        CrearModelo();
+        Cargar_Informacion();
     }
 
     /**
@@ -27,21 +41,169 @@ public class gestionar_proveedores extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtDireccion = new javax.swing.JTextField();
+        bSeleccionar = new javax.swing.JButton();
+        txtEmail = new javax.swing.JTextField();
+        bGuardar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        txtNombre = new javax.swing.JTextField();
+        bActualizar = new javax.swing.JButton();
+        txtTelefono = new javax.swing.JTextField();
+        txtNIT = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtDireccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDireccionActionPerformed(evt);
+            }
+        });
+
+        bSeleccionar.setText("Seleccionar");
+        bSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSeleccionarActionPerformed(evt);
+            }
+        });
+
+        bGuardar.setText("Guardar");
+        bGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGuardarActionPerformed(evt);
+            }
+        });
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
+
+        bActualizar.setText("Actualizar");
+        bActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 1320, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(220, 220, 220)
+                            .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(190, 190, 190)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGap(70, 70, 70)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 638, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(60, 60, 60)
+                            .addComponent(txtNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(180, 180, 180)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(30, 30, 30)
+                            .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDireccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDireccionActionPerformed
+
+    private void bSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSeleccionarActionPerformed
+        txtNIT.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
+        txtNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
+        txtTelefono.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
+        txtDireccion.setText(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
+        txtEmail.setText(tabla.getValueAt(tabla.getSelectedRow(), 4).toString());
+
+        cEdit = cProveedores.findProveedores((String) modelo.getValueAt(tabla.getSelectedRow(), 0));
+    }//GEN-LAST:event_bSeleccionarActionPerformed
+
+    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+        try {
+            Proveedores c = new Proveedores();
+
+            c.setProNIT(txtNIT.getText());
+            c.setProNombre(txtNombre.getText());
+            c.setProTelefono(txtTelefono.getText());
+            c.setProDireccion(txtDireccion.getText());
+            c.setProEmail(txtEmail.getText());
+
+            cProveedores.create(c);
+            System.out.println("Los datos fueron guardados");
+
+            CrearModelo();
+            Cargar_Informacion();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("Problema el guardar datos");
+        }
+    }//GEN-LAST:event_bGuardarActionPerformed
+
+    private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
+        try{
+            cEdit.setProNombre(txtNombre.getText());
+            cEdit.setProTelefono(txtTelefono.getText());
+            cEdit.setProDireccion(txtDireccion.getText());
+            cEdit.setProEmail(txtEmail.getText());
+
+            cProveedores.edit(cEdit);
+            System.out.println("Se actualizo");
+            CrearModelo();
+            Cargar_Informacion();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Error al actualizar");
+        }
+    }//GEN-LAST:event_bActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,7 +239,73 @@ public class gestionar_proveedores extends javax.swing.JFrame {
             }
         });
     }
+    
+    DefaultTableModel modelo;
+    private void CrearModelo() {
+        try {
+            modelo = (new DefaultTableModel(
+                    null, new String[]{
+                        "NIT", "Nombre", "Telefono",
+                        "Direccion", "Email"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tabla.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Problema con el modelo de tabla");
+        }
+    }
+    
+    
+    private void Cargar_Informacion(){
+        try{
+            Object o[]=null;
+            List<Proveedores> listP = cProveedores.findProveedoresEntities();
+            
+            for (int i=0; i< listP.size(); i++){
+                modelo.addRow(o);
+                modelo.setValueAt(listP.get(i).getProNIT(), i, 0);
+                modelo.setValueAt(listP.get(i).getProNombre(), i, 1);
+                modelo.setValueAt(listP.get(i).getProTelefono(), i, 2);
+                modelo.setValueAt(listP.get(i).getProDireccion(), i, 3);
+                modelo.setValueAt(listP.get(i).getProEmail(), i, 4);
+                
+            }                                            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("problema al cargar datos");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bActualizar;
+    private javax.swing.JButton bGuardar;
+    private javax.swing.JButton bSeleccionar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtNIT;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

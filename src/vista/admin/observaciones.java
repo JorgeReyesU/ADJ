@@ -5,17 +5,45 @@
  */
 package vista.admin;
 
+import java.awt.Dimension;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Empleados;
+import modelo.Observaciones;
+import persistencia.EmpleadosJpaController;
+import persistencia.ObservacionesJpaController;
+
 /**
  *
  * @author reyes
  */
 public class observaciones extends javax.swing.JFrame {
-
+    
+    EmpleadosJpaController cEmpleados = new EmpleadosJpaController();
+    ObservacionesJpaController cObservaciones = new ObservacionesJpaController();
+    Observaciones oEdit;
+    
     /**
      * Creates new form observaciones
      */
     public observaciones() {
         initComponents();
+        this.setMinimumSize(new Dimension(1000, 680));
+        this.setLocationRelativeTo(null);
+        CrearModelo();
+        Cargar_Informacion();
+    }
+    
+    public static String darFormato(Date date) {
+        if(date == null){
+            return null;
+        }else {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            return simpleDateFormat.format(date).toUpperCase();
+        }
     }
 
     /**
@@ -27,21 +55,75 @@ public class observaciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        btnDil = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
+
+        btnDil.setText("Diligenciada");
+        btnDil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDilActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(441, Short.MAX_VALUE)
+                .addComponent(btnDil, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(400, 400, 400))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(64, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(64, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(606, Short.MAX_VALUE)
+                .addComponent(btnDil)
+                .addGap(26, 26, 26))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(28, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(73, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDilActionPerformed
+        oEdit = cObservaciones.findObservaciones((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
+        try{
+            oEdit.setObsEstado(1);
+            cObservaciones.edit(oEdit);
+            System.out.println("Se actualizo");
+            CrearModelo();
+            Cargar_Informacion();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Error al actualizar");
+        }
+    }//GEN-LAST:event_btnDilActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,7 +159,66 @@ public class observaciones extends javax.swing.JFrame {
             }
         });
     }
+    
+    DefaultTableModel modelo;
+    private void CrearModelo() {
+        try {
+            modelo = (new DefaultTableModel(
+                    null, new String[]{
+                        "Codigo", "Empleado", "Mensaje", "Fecha"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tabla.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Problema con el modelo de tabla");
+        }
+    }
+    
+    
+    private void Cargar_Informacion(){
+        try{
+            Object o[]=null;
+            List<Observaciones> listP = cObservaciones.findObservacionesEntities();
+            
+            int cont = 0;
+            for (int i = 0; i < listP.size(); i++) {
+                if (listP.get(i).getObsEstado() == 0) {
+                    modelo.addRow(o);
+                    modelo.setValueAt(listP.get(i).getObsCodigo(), cont, 0);
+                    modelo.setValueAt(cEmpleados.findEmpleados(listP.get(i).getEmpDni().getEmpDni()).getEmpNombre(), cont, 1);
+                    modelo.setValueAt(listP.get(i).getObsDescripcion(), cont, 2);
+                    modelo.setValueAt(darFormato(listP.get(i).getObsFecha()), cont, 3);
+                    cont++;
+                }
+            }                                 
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("problema al cargar datos");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDil;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

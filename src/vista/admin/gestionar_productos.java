@@ -5,17 +5,33 @@
  */
 package vista.admin;
 
+import java.awt.Dimension;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Productos;
+import modelo.Proveedores;
+import persistencia.ProductosJpaController;
+import persistencia.ProveedoresJpaController;
+
 /**
  *
  * @author reyes
  */
 public class gestionar_productos extends javax.swing.JFrame {
-
+    
+    ProveedoresJpaController cProveedores = new ProveedoresJpaController();
+    ProductosJpaController cProductos = new ProductosJpaController();
+    Productos cEdit;
     /**
      * Creates new form gestionar_productos
      */
     public gestionar_productos() {
         initComponents();
+        this.setMinimumSize(new Dimension(1400, 680));
+        this.setLocationRelativeTo(null);
+        CrearModelo();
+        Cargar_Informacion();
     }
 
     /**
@@ -27,21 +43,175 @@ public class gestionar_productos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bSeleccionar = new javax.swing.JButton();
+        txtNombre = new javax.swing.JTextField();
+        txtDescripcion = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
+        txtPrecioV = new javax.swing.JTextField();
+        txtPrecioC = new javax.swing.JTextField();
+        bGuardar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        bActualizar = new javax.swing.JButton();
+        comboUnidad = new javax.swing.JComboBox<>();
+        comboProv = new javax.swing.JComboBox<>();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        bSeleccionar.setText("Seleccionar");
+        bSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSeleccionarActionPerformed(evt);
+            }
+        });
+
+        bGuardar.setText("Guardar");
+        bGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGuardarActionPerformed(evt);
+            }
+        });
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
+
+        bActualizar.setText("Actualizar");
+        bActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bActualizarActionPerformed(evt);
+            }
+        });
+
+        comboUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Kg", "Gal" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(240, 240, 240)
+                .addComponent(comboProv, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(876, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(40, 40, 40)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(comboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPrecioV, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPrecioC, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(62, 62, 62)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(419, Short.MAX_VALUE)
+                .addComponent(comboProv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(248, 248, 248))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(459, 459, 459)
+                            .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(59, 59, 59)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(comboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(txtPrecioV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(20, 20, 20)
+                            .addComponent(txtPrecioC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(120, 120, 120)
+                            .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(40, 40, 40)
+                            .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSeleccionarActionPerformed
+        txtNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
+        txtDescripcion.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
+        comboUnidad.setSelectedItem(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
+        txtCantidad.setText(tabla.getValueAt(tabla.getSelectedRow(), 4).toString());
+        txtPrecioC.setText(tabla.getValueAt(tabla.getSelectedRow(), 5).toString());
+        txtPrecioV.setText(tabla.getValueAt(tabla.getSelectedRow(), 6).toString());
+        comboProv.addItem(modelo.getValueAt(tabla.getSelectedRow(), 7).toString());
+
+        //Productos produc = new Productos();
+        //produc.se
+        cEdit = cProductos.findProductos((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
+    }//GEN-LAST:event_bSeleccionarActionPerformed
+
+    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+        try {
+            Productos c = new Productos();
+
+            c.setProdNombre(txtNombre.getText());
+            c.setProdDescripcion(txtDescripcion.getText());
+            c.setProdUnidadMedida((String) comboUnidad.getSelectedItem());
+            c.setProdCantidad(Integer.parseInt(txtCantidad.getText()));
+            c.setProdPrecioVenta(Integer.parseInt(txtPrecioV.getText()));
+            c.setProdPrecioComprado(Integer.parseInt(txtPrecioC.getText()));
+            c.setProNIT(cProveedores.findProveedores(comboProv.getSelectedItem().toString()));
+
+            cProductos.create(c);
+            System.out.println("Los datos fueron guardados");
+
+            CrearModelo();
+            Cargar_Informacion();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("Problema el guardar datos");
+        }
+    }//GEN-LAST:event_bGuardarActionPerformed
+
+    private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
+        try{
+            cEdit.setProdNombre(txtNombre.getText());
+            cEdit.setProdDescripcion(txtDescripcion.getText());
+            cEdit.setProdCantidad(Integer.parseInt(txtCantidad.getText()));
+            cEdit.setProdPrecioComprado(Integer.parseInt(txtPrecioC.getText()));
+            cEdit.setProdPrecioVenta(Integer.parseInt(txtPrecioV.getText()));
+            cEdit.setProNIT(cProveedores.findProveedores(comboProv.getSelectedItem().toString()));
+
+            cProductos.edit(cEdit);
+            System.out.println("Se actualizo");
+            CrearModelo();
+            Cargar_Informacion();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Error al actualizar");
+        }
+    }//GEN-LAST:event_bActualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,7 +247,86 @@ public class gestionar_productos extends javax.swing.JFrame {
             }
         });
     }
+    
+    DefaultTableModel modelo;
+    private void CrearModelo() {
+        try {
+            modelo = (new DefaultTableModel(
+                    null, new String[]{
+                        "Codigo", "Nombre", "Descripcion",
+                        "Unidad", "Cantidad", "P. Comprado",
+                        "P. Venta", "Proveedor"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tabla.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Problema con el modelo de tabla");
+        }
+    }
+    
+    
+    private void Cargar_Informacion(){
+        try{
+            Object o[]=null;
+            List<Productos> listP = cProductos.findProductosEntities();
+            List<Proveedores> listProv = cProveedores.findProveedoresEntities();
+            for (int i=0; i< listP.size(); i++){
+                modelo.addRow(o);
+                modelo.setValueAt(listP.get(i).getProdCodigo(), i, 0);
+                modelo.setValueAt(listP.get(i).getProdNombre(), i, 1);
+                modelo.setValueAt(listP.get(i).getProdDescripcion(), i, 2);
+                modelo.setValueAt(listP.get(i).getProdUnidadMedida(), i, 3);
+                modelo.setValueAt(listP.get(i).getProdCantidad(), i, 4);
+                modelo.setValueAt(listP.get(i).getProdPrecioComprado(), i, 5);
+                modelo.setValueAt(listP.get(i).getProdPrecioVenta(), i, 6);
+                modelo.setValueAt(listP.get(i).getProNIT().getProNIT(), i, 7);
+                
+            } 
+            
+            for (int i = 0; i < listProv.size(); i++) {
+                comboProv.addItem(listProv.get(i).getProNIT());
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("problema al cargar datos");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bActualizar;
+    private javax.swing.JButton bGuardar;
+    private javax.swing.JButton bSeleccionar;
+    private javax.swing.JComboBox<String> comboProv;
+    private javax.swing.JComboBox<String> comboUnidad;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPrecioC;
+    private javax.swing.JTextField txtPrecioV;
     // End of variables declaration//GEN-END:variables
 }

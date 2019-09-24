@@ -5,17 +5,48 @@
  */
 package vista.admin;
 
+import java.awt.Dimension;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Empleados;
+import persistencia.EmpleadosJpaController;
+
 /**
  *
  * @author reyes
  */
 public class gestionar_empleados extends javax.swing.JFrame {
 
+    EmpleadosJpaController cEmpleados = new EmpleadosJpaController();
+    Empleados cEdit;
+    
+    java.util.Date fecha = new Date();
+    String strDateFormat = "dd/MM/y";
+    SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
+    //System.out.println(objSDF.format(fecha));
+    String fechaHoy = objSDF.format(fecha);
+    
     /**
      * Creates new form gestionar_empleados
      */
     public gestionar_empleados() {
         initComponents();
+        this.setMinimumSize(new Dimension(1400, 680));
+        this.setLocationRelativeTo(null);
+        CrearModelo();
+        Cargar_Informacion();
+    }
+    
+    public static String darFormato(Date date) {
+        if(date == null){
+            return null;
+        }else {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            return simpleDateFormat.format(date).toUpperCase();
+        }
     }
 
     /**
@@ -27,21 +58,199 @@ public class gestionar_empleados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        btnSelect = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        txtDni = new javax.swing.JTextField();
+        txtApellido = new javax.swing.JTextField();
+        comboGenero = new javax.swing.JComboBox<>();
+        txtSalario = new javax.swing.JTextField();
+        comboCargo = new javax.swing.JComboBox<>();
+        txtNombre = new javax.swing.JTextField();
+        dateNac = new com.toedter.calendar.JDateChooser();
+        dateCon = new com.toedter.calendar.JDateChooser();
+        dateDes = new com.toedter.calendar.JDateChooser();
+        btnActualizar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
+
+        btnSelect.setText("Seleccionar");
+        btnSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectActionPerformed(evt);
+            }
+        });
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        comboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+
+        comboCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "seller", "worker", "courier" }));
+        comboCargo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(65, 65, 65)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dateDes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                            .addComponent(dateCon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(dateNac, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDni)
+                            .addComponent(txtApellido)
+                            .addComponent(comboGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtSalario)
+                            .addComponent(comboCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNombre))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSelect)
+                        .addGap(71, 71, 71)
+                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(comboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(dateNac, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(dateCon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(comboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(dateDes, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSelect)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnActualizar))
+                .addGap(35, 35, 35))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
+            Empleados c = new Empleados();
+
+            c.setEmpDni(Integer.parseInt(txtDni.getText()));
+            c.setEmpNombre(txtNombre.getText());
+            c.setEmpApellido(txtApellido.getText());
+            
+            String generoS = (String) comboGenero.getSelectedItem();
+            char genero = generoS.charAt(0);
+            c.setEmpGenero(genero);
+            
+          //  Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(txtFN.getText()); 
+            c.setEmpFechaNacimiento(dateNac.getDate());
+            
+          //  Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(txtFC.getText()); 
+            c.setEmpFechaContratacion(dateCon.getDate());
+            
+            c.setEmpSalario(Integer.parseInt(txtSalario.getText()));
+            c.setEmpCargo((String) comboCargo.getSelectedItem());
+            
+          //  Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(txtFD.getText()); 
+            c.setEmpFechaDespido(null);           
+
+            cEmpleados.create(c);
+            System.out.println("Los datos fueron guardados");
+
+            CrearModelo();
+            Cargar_Informacion();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("Problema el guardar datos");
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        try{
+            cEdit.setEmpNombre(txtNombre.getText());
+            cEdit.setEmpApellido(txtApellido.getText());
+            
+            String generoS = (String) comboGenero.getSelectedItem();
+            char genero = generoS.charAt(0);
+            cEdit.setEmpGenero(genero);
+
+            cEdit.setEmpFechaNacimiento(dateNac.getDate());
+            cEdit.setEmpFechaContratacion(dateCon.getDate());           
+            cEdit.setEmpSalario(Integer.parseInt(txtSalario.getText()));           
+            cEdit.setEmpCargo((String) comboCargo.getSelectedItem());
+            cEdit.setEmpFechaDespido(dateDes.getDate());           
+
+            cEmpleados.edit(cEdit);
+            System.out.println("Se actualizo");
+            CrearModelo();
+            Cargar_Informacion();
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Error al actualizar");
+        }   
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
+        txtDni.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
+        txtNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
+        txtApellido.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
+        comboGenero.setSelectedItem(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
+        dateNac.setDate(cEmpleados.findEmpleados((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0)).getEmpFechaNacimiento());
+        dateCon.setDate(cEmpleados.findEmpleados((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0)).getEmpFechaContratacion());
+        txtSalario.setText(tabla.getValueAt(tabla.getSelectedRow(), 6).toString());
+        comboCargo.setSelectedItem(tabla.getValueAt(tabla.getSelectedRow(), 7).toString());
+        dateDes.setDate(cEmpleados.findEmpleados((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0)).getEmpFechaDespido());
+        
+        cEdit = cEmpleados.findEmpleados((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
+    }//GEN-LAST:event_btnSelectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,7 +286,86 @@ public class gestionar_empleados extends javax.swing.JFrame {
             }
         });
     }
+    
+    DefaultTableModel modelo;
+    private void CrearModelo() {
+        try {
+            modelo = (new DefaultTableModel(
+                    null, new String[]{
+                        "Dni", "Nombres", "Apellidos",
+                        "Genero", "F. Nacimiento", "F. Contratacion",
+                        "Salario", "Cargo", "F. Despido"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tabla.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Problema con el modelo de tabla");
+        }
+    }
+    
+    
+    private void Cargar_Informacion(){
+        try{
+            Object o[]=null;
+            List<Empleados> listE = cEmpleados.findEmpleadosEntities();
+            
+            for (int i=0; i< listE.size(); i++){
+                modelo.addRow(o);
+                modelo.setValueAt(listE.get(i).getEmpDni(), i, 0);
+                modelo.setValueAt(listE.get(i).getEmpNombre(), i, 1);
+                modelo.setValueAt(listE.get(i).getEmpApellido(), i, 2);
+                modelo.setValueAt(listE.get(i).getEmpGenero(), i, 3);
+                modelo.setValueAt(darFormato(listE.get(i).getEmpFechaNacimiento()), i, 4);
+                modelo.setValueAt(darFormato(listE.get(i).getEmpFechaContratacion()), i, 5);
+                modelo.setValueAt(listE.get(i).getEmpSalario(), i, 6);
+                modelo.setValueAt(listE.get(i).getEmpCargo(), i, 7);
+                modelo.setValueAt(darFormato(listE.get(i).getEmpFechaDespido()), i, 8);
+                
+            }                                            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("problema al cargar datos");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnSelect;
+    private javax.swing.JComboBox<String> comboCargo;
+    private javax.swing.JComboBox<String> comboGenero;
+    private com.toedter.calendar.JDateChooser dateCon;
+    private com.toedter.calendar.JDateChooser dateDes;
+    private com.toedter.calendar.JDateChooser dateNac;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtApellido;
+    private javax.swing.JTextField txtDni;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtSalario;
     // End of variables declaration//GEN-END:variables
 }
