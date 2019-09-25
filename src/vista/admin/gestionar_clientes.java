@@ -53,7 +53,7 @@ public class gestionar_clientes extends javax.swing.JFrame {
         txtDireccion = new javax.swing.JTextField();
         comboTipo = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         bSeleccionar.setText("seleccionar");
         bSeleccionar.addActionListener(new java.awt.event.ActionListener() {

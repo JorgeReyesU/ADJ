@@ -5,17 +5,41 @@
  */
 package vista.seller;
 
+import java.awt.Dimension;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import modelo.Ordenes;
+import persistencia.ClientesJpaController;
+import persistencia.OrdenesJpaController;
+
 /**
  *
  * @author reyes
  */
 public class pago extends javax.swing.JFrame {
 
+    OrdenesJpaController cOrdenes = new OrdenesJpaController();
+    ClientesJpaController cClientes = new ClientesJpaController();
+    
+    java.util.Date fecha = new Date();
+    String strDateFormat = "dd/MM/y";
+    SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
+    //System.out.println(objSDF.format(fecha));
+    String fechaHoy = objSDF.format(fecha);
+    
+    
+    
+    public static Ordenes Orden;
+    public static int ordenN = 0;
+    
     /**
      * Creates new form pago
      */
     public pago() {
         initComponents();
+        this.setMinimumSize(new Dimension(1000, 680));
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -27,21 +51,135 @@ public class pago extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtTelefono = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        comboTP = new javax.swing.JComboBox<>();
+        bCancelar = new javax.swing.JButton();
+        bEjecutar = new javax.swing.JButton();
+        dateFD = new com.toedter.calendar.JDateChooser();
+        dateFP = new com.toedter.calendar.JDateChooser();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(58, 58, 128));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Bancario", " " }));
+
+        comboTP.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        comboTP.setForeground(new java.awt.Color(58, 58, 128));
+        comboTP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contado", "Credito" }));
+
+        bCancelar.setText("cancelar");
+        bCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bCancelarActionPerformed(evt);
+            }
+        });
+
+        bEjecutar.setText("Ejecutar");
+        bEjecutar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEjecutarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(116, 116, 116)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboTP, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(bCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addComponent(bEjecutar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTelefono)
+                            .addComponent(dateFP, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
+                        .addGap(30, 30, 30)
+                        .addComponent(dateFD, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateFD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(220, 220, 220)
+                .addComponent(dateFP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(comboTP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bEjecutar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(130, 130, 130))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_bCancelarActionPerformed
+
+    private void bEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEjecutarActionPerformed
+        try {
+            Ordenes c = new Ordenes();
+
+            Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(fechaHoy);
+            c.setOrdFechaOrden(date1);
+
+            //  Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(txtFD.getText());
+            c.setOrdFechaDespacho(dateFD.getDate());
+
+            if(comboTP.getSelectedItem() == "Credito"){
+                //      Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(txtFP.getText());
+                c.setOrdFechaPago(dateFP.getDate());
+            } else {
+                Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(fechaHoy);
+                c.setOrdFechaPago(date3);
+            }
+
+            c.setOrdDireccionEnvio(txtDireccion.getText());
+            c.setOrdTelefonoEnvio(txtTelefono.getText());
+            c.setOrdComentario("-");  //Comentario sera el indicador si ya se despacho la orden o no
+            // En este caso como apenas esta haciendo la orden le damos el varlo "-" para indicar
+            // que todavia no se ha hecho
+
+            //   venta_facturacion ventanaF = new venta_facturacion();
+            //  int Descuento = Integer.parseInt(ventanaF.Descuento);
+            //  String Cliente = ventanaF.NITCliente;
+            c.setOrdDescuento(facturacion.Descuento);
+            c.setOrdTipoPago((String) comboTP.getSelectedItem());
+
+            // clie.cliNIT = Cliente;
+            c.setCliNIT(cClientes.findClientes(facturacion.NITCliente));
+
+            cOrdenes.create(c);
+            ordenN = 1;
+            System.out.println("Los datos fueron guardados");
+            this.setVisible(false);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("Problema el guardar datos");
+        }
+
+    }//GEN-LAST:event_bEjecutarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +217,13 @@ public class pago extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bCancelar;
+    private javax.swing.JButton bEjecutar;
+    private javax.swing.JComboBox<String> comboTP;
+    private com.toedter.calendar.JDateChooser dateFD;
+    private com.toedter.calendar.JDateChooser dateFP;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
