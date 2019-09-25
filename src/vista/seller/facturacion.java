@@ -5,8 +5,11 @@
  */
 package vista.seller;
 
+import java.awt.Desktop;
 import java.awt.Dimension;
+import java.io.File;
 import java.util.List;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import logica.logica_venta_facturacion;
@@ -29,8 +32,11 @@ public class facturacion extends javax.swing.JFrame {
     ClientesJpaController cClientes = new ClientesJpaController();
     DetallesordenJpaController cDetalles = new DetallesordenJpaController();
     OrdenesJpaController cOrdenes = new OrdenesJpaController();
+
+    logicaFactura factura = new logicaFactura();
+
     public static Ordenes Ordennnn;
-    
+
     /**
      * Creates new form facturacion
      */
@@ -38,9 +44,11 @@ public class facturacion extends javax.swing.JFrame {
         initComponents();
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setMinimumSize(new Dimension(1420, 950));
-        this.setLocationRelativeTo(null); 
+        this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion_Combos();
+
+        factura.iniciarTabla();
     }
 
     /**
@@ -171,7 +179,11 @@ public class facturacion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addComponent(comboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(750, 750, 750)
+                        .addGap(250, 250, 250)
+                        .addComponent(bFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(63, 63, 63)
+                        .addComponent(bPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(177, 177, 177)
                         .addComponent(labelSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
@@ -183,12 +195,7 @@ public class facturacion extends javax.swing.JFrame {
                         .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(100, 100, 100)
-                        .addComponent(bCliente))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(711, 711, 711)
-                        .addComponent(bFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(229, 229, 229)
-                        .addComponent(bPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(bCliente)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -196,20 +203,27 @@ public class facturacion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboColor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(comboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(labelSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(comboColor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(comboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(labelSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(bFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(bPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
@@ -219,11 +233,7 @@ public class facturacion extends javax.swing.JFrame {
                 .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(bCliente)
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
@@ -241,16 +251,46 @@ public class facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_bDescuentoActionPerformed
 
     private void bFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarActionPerformed
-                if(contadorAgregar > 0){
-                    if (pago.ordenN == 1) {
-                        //    for (int i = 0; i < contadorAgregar; i++) {System.out.println(modelo.getValueAt(i, 0));}}}
+        if (contadorAgregar > 0) {
+            if (pago.ordenN == 1) {
+                //    for (int i = 0; i < contadorAgregar; i++) {System.out.println(modelo.getValueAt(i, 0));}}}
                 try {
-                    for (int i = 0; i < contadorAgregar; i++) {                        
+
+                    String nitClie = (String) comboClientes.getSelectedItem();
+                //    Query q = cOrdenes.getEntityManager().createNativeQuery(
+                //            "SELECT ordenes.ordCodigo FROM ordenes ORDER BY ordCodigo desc limit 1");
+
+                 //   int id = (int) q.getSingleResult();
+
+                    List<Ordenes> listO = cOrdenes.findOrdenesEntities();
+                    int indice = cOrdenes.getOrdenesCount();
+                    Ordenes ordenC = cOrdenes.findOrdenes(indice);
+                    
+                    int id = ordenC.getOrdCodigo();
+                    
+                    String dir = cOrdenes.findOrdenes(id).getOrdDireccionEnvio();
+                    String tel = cOrdenes.findOrdenes(id).getOrdTelefonoEnvio();
+                    String fecha = new pago().fechaHoy;
+
+                    System.out.println(id);
+
+                    factura.generar("Fecha: " + fecha, "  Codigo: " + id,
+                            "    Cliente: " + cClientes.findClientes(nitClie).getCliNombre(), "NIT: " + nitClie,
+                            labelDescuento.getText(),
+                            "   Direccion: " + dir, "   Telefono: " + tel, "Firma: ____________________",
+                            "facturas\\" + "Factura de orden " + id + ".pdf");
+
+                    factura.closeNow();
+
+                    Desktop f = Desktop.getDesktop();
+                    f.open(new File("facturas\\" + "Factura de orden " + id + ".pdf"));
+
+                    for (int i = 0; i < contadorAgregar; i++) {
                         List<Productos> listP = cProductos.findProductosEntities();
                         String prodN = (String) modelo.getValueAt(i, 0);
                         int cantidadd = (Integer) modelo.getValueAt(i, 2);
                         int contadorw = 0;
-                        
+
                         System.out.println("proN: " + prodN);
                         for (int j = 0; j < listP.size(); j++) {
                             if (prodN == listP.get(j).getProdNombre()) {
@@ -284,58 +324,57 @@ public class facturacion extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, e.getMessage());
                     System.out.println("Error al crear los detalles de ordenes");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "No ha realizado pago");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Agregue al menos un producto");
         }
         pago.ordenN = 0;
 
     }//GEN-LAST:event_bFinalizarActionPerformed
 
-    
-    
     public static int Descuento;
     public static String NITCliente;
     private void bPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPagarActionPerformed
-        try{
-            if(contadorAgregar > 0){
+        try {
+            if (contadorAgregar > 0) {
                 NITCliente = String.valueOf(comboClientes.getSelectedItem());
                 Descuento = Integer.parseInt(labelDescuento.getText());
                 pago ventana = new pago();
                 ventana.setVisible(true);
-            }else {
+            } else {
                 JOptionPane.showMessageDialog(null, "No hay ningun producto para pagar");
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al pagar");
         }
     }//GEN-LAST:event_bPagarActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-        try{
-            if(contadorAgregar > 0){
+        try {
+            if (contadorAgregar > 0) {
                 int numero = (int) tabla.getValueAt(tabla.getSelectedRow(), 5);
                 subtotal = subtotal - numero;
 
+                factura.quitarDatoTabla(tabla.getSelectedRow(), numero);
+
                 modelo.removeRow(tabla.getSelectedRow());
-                contadorAgregar --;
+                contadorAgregar--;
                 // System.out.println(subtotal);
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Selecciona un producto para eliminar.");
         }
         labelSubtotal.setText(String.valueOf(subtotal));
         logica_venta_facturacion.totalL();
     }//GEN-LAST:event_bEliminarActionPerformed
 
-    
     int contadorAgregar = 0;
     public static int subtotal = 0;
     int total = 0;
-    
-    
+
+
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
         List<Productos> listP = cProductos.findProductosEntities();
         int codigo = 0;
@@ -358,9 +397,12 @@ public class facturacion extends javax.swing.JFrame {
 
                 logica_venta_facturacion.agregarItemTabla(contadorAgregar, prodNombre, prodColor, cantidadP, unidad, valorU, totalP);
                 contadorAgregar++;
+
+                factura.agregarDatoTabla(cantidadP, prodNombre, valorU, totalP);
+
             } else {
                 JOptionPane.showMessageDialog(null, "No existe en stock la cantidad solicitada de este producto. \n"
-                    + "Solo quedan: " + cantidadProd + " Unidades de " + prodNombre);
+                        + "Solo quedan: " + cantidadProd + " Unidades de " + prodNombre);
             }
         } else {
             JOptionPane.showMessageDialog(null, "Ingrese una cantidad mayor a 0.");
@@ -408,8 +450,9 @@ public class facturacion extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public static DefaultTableModel modelo;
+
     private void CrearModelo() {
         try {
             modelo = (new DefaultTableModel(
@@ -444,21 +487,21 @@ public class facturacion extends javax.swing.JFrame {
             System.out.println("Problema con el modelo de tabla");
         }
     }
-    
-    private void Cargar_Informacion_Combos(){
-        try{
+
+    private void Cargar_Informacion_Combos() {
+        try {
             List<Productos> listP = cProductos.findProductosEntities();
-            
-            for (int i=0; i< listP.size(); i++){
-                comboProducto.addItem(listP.get(i).getProdNombre());     
-            } 
-            
-            List<Clientes> listC = cClientes.findClientesEntities();
-            
-            for (int i=0; i< listC.size(); i++){
-                comboClientes.addItem(listC.get(i).getCliNIT());     
+
+            for (int i = 0; i < listP.size(); i++) {
+                comboProducto.addItem(listP.get(i).getProdNombre());
             }
-            
+
+            List<Clientes> listC = cClientes.findClientesEntities();
+
+            for (int i = 0; i < listC.size(); i++) {
+                comboClientes.addItem(listC.get(i).getCliNIT());
+            }
+
             comboColor.addItem("-");
             comboColor.addItem("123");
             comboColor.addItem("132");
@@ -466,7 +509,7 @@ public class facturacion extends javax.swing.JFrame {
             comboColor.addItem("231");
             comboColor.addItem("312");
             comboColor.addItem("321");
-        }catch(Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
             System.out.println("problema al cargar datos");
         }
