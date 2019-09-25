@@ -5,17 +5,36 @@
  */
 package vista.worker;
 
+import java.awt.Dimension;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Detallesorden;
+import modelo.Ordenes;
+import modelo.Productos;
+import persistencia.DetallesordenJpaController;
+import persistencia.OrdenesJpaController;
+import persistencia.ProductosJpaController;
+
 /**
  *
  * @author reyes
  */
 public class pedido_detalles extends javax.swing.JFrame {
 
+    DetallesordenJpaController cDetalles = new DetallesordenJpaController();
+    OrdenesJpaController cOrdenes = new OrdenesJpaController();
+    ProductosJpaController cProductos = new ProductosJpaController();
+    Detallesorden dEdit;
+    
     /**
      * Creates new form pedido_detalles
      */
     public pedido_detalles() {
         initComponents();
+        this.setMinimumSize(new Dimension(1000, 680));
+        this.setLocationRelativeTo(null);
+        CrearModelo();
     }
 
     /**
@@ -27,17 +46,43 @@ public class pedido_detalles extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 962, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 683, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 18, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 125, Short.MAX_VALUE)))
         );
 
         pack();
@@ -77,7 +122,61 @@ public class pedido_detalles extends javax.swing.JFrame {
             }
         });
     }
+    
+    DefaultTableModel modelo;
+    private void CrearModelo() {
+        try {
+            modelo = (new DefaultTableModel(
+                    null, new String[]{
+                        "Producto", "Cantidad", "Color"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tabla.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Problema con el modelo de tabla");
+        }
+    }
+    
+    public void Cargar_Informacion(int num){
+        try{    
+            Object o[]=null;
+            List<Detallesorden> listP = cDetalles.findDetallesordenEntities();
+            int cont =0;
+            for (int i=0; i< listP.size(); i++){
+                if (listP.get(i).getOrdCodigo().getOrdCodigo() == num) {
+                    modelo.addRow(o);
+                    modelo.setValueAt(cProductos.findProductos(listP.get(i).getProdCodigo().getProdCodigo()).getProdNombre(), cont, 0);                  
+                    modelo.setValueAt(listP.get(i).getDetCantidad(), cont, 1);
+                    modelo.setValueAt(listP.get(i).getDetDescripcion(), cont, 2);
+                    cont++;
+                } 
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("problema al cargar datos");
+        }    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

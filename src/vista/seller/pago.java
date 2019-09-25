@@ -169,7 +169,7 @@ public class pago extends javax.swing.JFrame {
 
             // clie.cliNIT = Cliente;
             c.setCliNIT(cClientes.findClientes(facturacion.NITCliente));
-
+            c.setOrdEstado(0);
             cOrdenes.create(c);
             ordenN = 1;
             System.out.println("Los datos fueron guardados");

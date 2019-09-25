@@ -272,7 +272,7 @@ public class facturacion extends javax.swing.JFrame {
                     String tel = cOrdenes.findOrdenes(id).getOrdTelefonoEnvio();
                     String fecha = new pago().fechaHoy;
 
-                    System.out.println(id);
+                   // System.out.println(id);
 
                     factura.generar("Fecha: " + fecha, "  Codigo: " + id,
                             "    Cliente: " + cClientes.findClientes(nitClie).getCliNombre(), "NIT: " + nitClie,
@@ -291,14 +291,14 @@ public class facturacion extends javax.swing.JFrame {
                         int cantidadd = (Integer) modelo.getValueAt(i, 2);
                         int contadorw = 0;
 
-                        System.out.println("proN: " + prodN);
+                       // System.out.println("proN: " + prodN);
                         for (int j = 0; j < listP.size(); j++) {
                             if (prodN == listP.get(j).getProdNombre()) {
-                                System.out.println("Se agrego " + listP.get(i).getProdNombre());
+                               // System.out.println("Se agrego " + listP.get(i).getProdNombre());
                                 contadorw = listP.get(j).getProdCodigo();
                             }
                         }
-                        System.out.println("Contadorw: " + contadorw);
+                       // System.out.println("Contadorw: " + contadorw);
                         String color = (String) modelo.getValueAt(i, 1);
 
                         Detallesorden c = new Detallesorden();
@@ -386,7 +386,7 @@ public class facturacion extends javax.swing.JFrame {
         }
         String prodColor = (String) comboColor.getSelectedItem();
         int cantidadP = Integer.parseInt(txtCantidad.getText());
-        System.out.println(cantidadP);
+       // System.out.println(cantidadP);
         String unidad = cProductos.findProductos(codigo).getProdUnidadMedida();
         int valorU = cProductos.findProductos(codigo).getProdPrecioVenta();
         int totalP = cantidadP * valorU;

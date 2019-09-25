@@ -18,8 +18,8 @@ public class logica_fabrica_stock_fabrica {
     MateriasprimasJpaController cMateriasprimas = new MateriasprimasJpaController();
     Materiasprimas cEdit;
     
-    int[][] graniplas = { {16, 10}, {5,100}, {6,50}, {7,2}, {8,10}, {4,5}, {11,5}, {12,1}, {14,1}, {15,1} };
-    int[][] pintura = { {16, 10}, {3,20}, {10,1}, {9,3}, {11,2}, {12,1}, {13,1}, {4,2}, {14,2}, {15,1} };
+    int[][] graniplas = { {1, 20}, {2,5}, {3,100}, {5,20}, {6,1}, {7,1}};
+    int[][] pintura = { {1, 10}, {2,5}, {4,10}, {5,5}, {7,2}};
     
     public void reducirMP(int a) {
         //Si a es 0 se ejecutara para graniplas
