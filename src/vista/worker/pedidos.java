@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Ordenes;
 import persistencia.OrdenesJpaController;
+import vista.login.login;
 
 /**
  *
@@ -29,7 +30,7 @@ public class pedidos extends javax.swing.JFrame {
      */
     public pedidos() {
         initComponents();
-        this.setMinimumSize(new Dimension(1420, 950));
+        this.setMinimumSize(new Dimension(1400, 900));
         this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
@@ -57,8 +58,16 @@ public class pedidos extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
         bMostrar = new javax.swing.JButton();
         btndespacho = new javax.swing.JButton();
+        btnPedidos = new javax.swing.JButton();
+        btnSUtileria = new javax.swing.JButton();
+        btnSFabrica = new javax.swing.JButton();
+        btnMPrimas = new javax.swing.JButton();
+        btnObs = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,50 +82,74 @@ public class pedidos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        bMostrar.setText("Mostrar");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 1210, 730));
+
+        bMostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bMostrar.png"))); // NOI18N
         bMostrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bMostrarActionPerformed(evt);
             }
         });
+        getContentPane().add(bMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 20, 200, 50));
 
-        btndespacho.setText("Despachado");
+        btndespacho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bDespachado.png"))); // NOI18N
         btndespacho.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndespachoActionPerformed(evt);
             }
         });
+        getContentPane().add(btndespacho, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 20, 200, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(357, Short.MAX_VALUE)
-                .addComponent(btndespacho, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136)
-                .addComponent(bMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(96, 96, 96)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btndespacho, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(758, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(68, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
+        btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bPedidos.png"))); // NOI18N
+        btnPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 83, 83));
+
+        btnSUtileria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockU.png"))); // NOI18N
+        btnSUtileria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSUtileriaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSUtileria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 83, 81));
+
+        btnSFabrica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockF.png"))); // NOI18N
+        btnSFabrica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSFabricaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSFabrica, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 82, 82));
+
+        btnMPrimas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockM.png"))); // NOI18N
+        btnMPrimas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMPrimasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnMPrimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 82, 80));
+
+        btnObs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bObservaciones.png"))); // NOI18N
+        btnObs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 82, 84));
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bExit.png"))); // NOI18N
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 810, 90, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Fabrica_Pedidos.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -130,17 +163,57 @@ public class pedidos extends javax.swing.JFrame {
     }//GEN-LAST:event_bMostrarActionPerformed
 
     private void btndespachoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndespachoActionPerformed
-        int num = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
-        OEdit = cOrdenes.findOrdenes(num);
-        OEdit.setOrdEstado(1);
-        try {
-            cOrdenes.edit(OEdit);
-            CrearModelo();
-            Cargar_Informacion();
-        } catch (Exception ex) {
-            System.out.println("Error al despachar el producto");
+        int resp = JOptionPane.showConfirmDialog(this, "Esta seguro de realizar la operacion?", "Confirmacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            int num = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
+            OEdit = cOrdenes.findOrdenes(num);
+            OEdit.setOrdEstado(1);
+            try {
+                cOrdenes.edit(OEdit);
+                CrearModelo();
+                Cargar_Informacion();
+            } catch (Exception ex) {
+                System.out.println("Error al despachar el producto");
+            }
         }
     }//GEN-LAST:event_btndespachoActionPerformed
+
+    private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
+        pedidos window = new pedidos();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnPedidosActionPerformed
+
+    private void btnSUtileriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUtileriaActionPerformed
+        stock_utileria window = new stock_utileria();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSUtileriaActionPerformed
+
+    private void btnSFabricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSFabricaActionPerformed
+        stock_fabrica window = new stock_fabrica();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSFabricaActionPerformed
+
+    private void btnMPrimasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMPrimasActionPerformed
+        mprimas window = new mprimas();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMPrimasActionPerformed
+
+    private void btnObsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObsActionPerformed
+        observaciones window = new observaciones();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnObsActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        login window = new login();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -235,7 +308,14 @@ public class pedidos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bMostrar;
+    private javax.swing.JButton btnMPrimas;
+    private javax.swing.JButton btnObs;
+    private javax.swing.JButton btnPedidos;
+    private javax.swing.JButton btnSFabrica;
+    private javax.swing.JButton btnSUtileria;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btndespacho;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables

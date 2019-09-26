@@ -5,6 +5,7 @@
  */
 package vista.admin;
 
+import java.awt.Dimension;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +27,7 @@ public class gestionar_clientes extends javax.swing.JFrame {
     public gestionar_clientes() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setMinimumSize(new Dimension(1400, 650));
         CrearModelo();
         Cargar_Informacion();
     }
@@ -52,22 +54,26 @@ public class gestionar_clientes extends javax.swing.JFrame {
         txtApellido = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         comboTipo = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bSeleccionar.setText("seleccionar");
+        bSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bSeleccionar.png"))); // NOI18N
         bSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bSeleccionarActionPerformed(evt);
             }
         });
+        getContentPane().add(bSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 510, 200, 50));
 
-        bGuardar.setText("Guardar");
+        bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bGuardar.png"))); // NOI18N
         bGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bGuardarActionPerformed(evt);
             }
         });
+        getContentPane().add(bGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 580, 200, 50));
 
         txtNIT.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtNIT.addActionListener(new java.awt.event.ActionListener() {
@@ -75,9 +81,17 @@ public class gestionar_clientes extends javax.swing.JFrame {
                 txtNITActionPerformed(evt);
             }
         });
+        getContentPane().add(txtNIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 240, 30));
 
         txtEmail.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmailActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, 240, 30));
 
+        tabla.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -91,88 +105,47 @@ public class gestionar_clientes extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(532, 33, 840, 590));
+
         txtDescuento.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         txtDescuento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescuentoActionPerformed(evt);
             }
         });
+        getContentPane().add(txtDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 450, 240, 30));
 
         txtNombre.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 240, 30));
 
-        bActualizar.setText("Actualizar");
+        bActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bActualizar.png"))); // NOI18N
         bActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bActualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(bActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 510, 200, 50));
 
         txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, 240, 30));
 
         txtApellido.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 240, 30));
 
         txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 240, 30));
 
         comboTipo.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hogar", "Empresa", "Constructor" }));
+        getContentPane().add(comboTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 240, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(80, 80, 80)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(480, 480, 480)
-                        .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
-                        .addComponent(txtNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(txtDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Gestionar_Clientes.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -192,28 +165,31 @@ public class gestionar_clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_bSeleccionarActionPerformed
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-        try {
-            Clientes c = new Clientes();
+        int resp = JOptionPane.showConfirmDialog(this, "Esta seguro de realizar la operacion?", "Confirmacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            try {
+                Clientes c = new Clientes();
 
-            c.setCliNIT(txtNIT.getText());
-            c.setCliNombre(txtNombre.getText());
-            c.setCliApellido(txtApellido.getText());
-            c.setCliTelefono(txtTelefono.getText());
-            c.setCliDireccion(txtDireccion.getText());
-            c.setCliEmail(txtEmail.getText());
-            c.setCliTipoCliente((String) comboTipo.getSelectedItem());
-            c.setCliDescuento(Integer.parseInt(txtDescuento.getText()));
+                c.setCliNIT(txtNIT.getText());
+                c.setCliNombre(txtNombre.getText());
+                c.setCliApellido(txtApellido.getText());
+                c.setCliTelefono(txtTelefono.getText());
+                c.setCliDireccion(txtDireccion.getText());
+                c.setCliEmail(txtEmail.getText());
+                c.setCliTipoCliente((String) comboTipo.getSelectedItem());
+                c.setCliDescuento(Integer.parseInt(txtDescuento.getText()));
 
-            cClientes.create(c);
-            System.out.println("Los datos fueron guardados");
+                cClientes.create(c);
+                System.out.println("Los datos fueron guardados");
 
-            CrearModelo();
-            Cargar_Informacion();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            System.out.println("Problema el guardar datos");
+                CrearModelo();
+                Cargar_Informacion();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                System.out.println("Problema el guardar datos");
+            }
         }
-
     }//GEN-LAST:event_bGuardarActionPerformed
 
     private void txtNITActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNITActionPerformed
@@ -225,25 +201,36 @@ public class gestionar_clientes extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDescuentoActionPerformed
 
     private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
-        try{
-            cEdit.setCliNombre(txtNombre.getText());
-            cEdit.setCliApellido(txtApellido.getText());
-            cEdit.setCliTelefono(txtTelefono.getText());
-            cEdit.setCliDireccion(txtDireccion.getText());
-            cEdit.setCliEmail(txtEmail.getText());
-            cEdit.setCliTipoCliente((String) comboTipo.getSelectedItem());
-            cEdit.setCliDescuento(Integer.parseInt(txtDescuento.getText()));
+        int resp = JOptionPane.showConfirmDialog(this, "Esta seguro de realizar la operacion?", "Confirmacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            try{
+                cEdit.setCliNombre(txtNombre.getText());
+                cEdit.setCliApellido(txtApellido.getText());
+                cEdit.setCliTelefono(txtTelefono.getText());
+                cEdit.setCliDireccion(txtDireccion.getText());
+                cEdit.setCliEmail(txtEmail.getText());
+                cEdit.setCliTipoCliente((String) comboTipo.getSelectedItem());
+                cEdit.setCliDescuento(Integer.parseInt(txtDescuento.getText()));
 
-            cClientes.edit(cEdit);
-            System.out.println("Se actualizo");
-            CrearModelo();
-            Cargar_Informacion();
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.toString() + "error");
-            System.out.println("Error al actualizar");
+                cClientes.edit(cEdit);
+                System.out.println("Se actualizo");
+                CrearModelo();
+                Cargar_Informacion();
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null, e.toString() + "error");
+                System.out.println("Error al actualizar");
+            }
         }
-
     }//GEN-LAST:event_bActualizarActionPerformed
+
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -348,6 +335,7 @@ public class gestionar_clientes extends javax.swing.JFrame {
     private javax.swing.JButton bGuardar;
     private javax.swing.JButton bSeleccionar;
     private javax.swing.JComboBox<String> comboTipo;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtApellido;

@@ -34,7 +34,7 @@ public class gestionar_empleados extends javax.swing.JFrame {
      */
     public gestionar_empleados() {
         initComponents();
-        this.setMinimumSize(new Dimension(1400, 680));
+        this.setMinimumSize(new Dimension(1400, 650));
         this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
@@ -72,9 +72,12 @@ public class gestionar_empleados extends javax.swing.JFrame {
         dateCon = new com.toedter.calendar.JDateChooser();
         dateDes = new com.toedter.calendar.JDateChooser();
         btnActualizar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tabla.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -88,154 +91,118 @@ public class gestionar_empleados extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        btnSelect.setText("Seleccionar");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 30, 740, 500));
+
+        btnSelect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bSeleccionar.png"))); // NOI18N
         btnSelect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSelectActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSelect, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 570, 200, 50));
 
-        btnGuardar.setText("Guardar");
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bGuardar.png"))); // NOI18N
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 570, 200, 50));
+        getContentPane().add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 90, 210, 30));
+        getContentPane().add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 210, 30));
 
         comboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+        getContentPane().add(comboGenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 210, 30));
+        getContentPane().add(txtSalario, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 210, 30));
 
         comboCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "seller", "worker", "courier" }));
         comboCargo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(comboCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 440, 210, 30));
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 210, 36));
+        getContentPane().add(dateNac, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 210, 30));
+        getContentPane().add(dateCon, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 210, 36));
+        getContentPane().add(dateDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 490, 210, 32));
 
-        btnActualizar.setText("Actualizar");
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bActualizar.png"))); // NOI18N
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 570, 200, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(dateDes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(dateCon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(dateNac, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtDni)
-                            .addComponent(txtApellido)
-                            .addComponent(comboGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtSalario)
-                            .addComponent(comboCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNombre))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSelect)
-                        .addGap(71, 71, 71)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(89, 89, 89)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 587, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(comboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(dateNac, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(dateCon, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(comboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(dateDes, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSelect)
-                    .addComponent(btnGuardar)
-                    .addComponent(btnActualizar))
-                .addGap(35, 35, 35))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Gestionar_Empleados.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        try {
-            Empleados c = new Empleados();
+        int resp = JOptionPane.showConfirmDialog(this, "Esta seguro de realizar la operacion?", "Confirmacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            try {
+                Empleados c = new Empleados();
 
-            c.setEmpDni(Integer.parseInt(txtDni.getText()));
-            c.setEmpNombre(txtNombre.getText());
-            c.setEmpApellido(txtApellido.getText());
-            
-            String generoS = (String) comboGenero.getSelectedItem();
-            char genero = generoS.charAt(0);
-            c.setEmpGenero(genero);
-            
-          //  Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(txtFN.getText()); 
-            c.setEmpFechaNacimiento(dateNac.getDate());
-            
-          //  Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(txtFC.getText()); 
-            c.setEmpFechaContratacion(dateCon.getDate());
-            
-            c.setEmpSalario(Integer.parseInt(txtSalario.getText()));
-            c.setEmpCargo((String) comboCargo.getSelectedItem());
-            
-          //  Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(txtFD.getText()); 
-            c.setEmpFechaDespido(null);           
+                c.setEmpDni(Integer.parseInt(txtDni.getText()));
+                c.setEmpNombre(txtNombre.getText());
+                c.setEmpApellido(txtApellido.getText());
 
-            cEmpleados.create(c);
-            System.out.println("Los datos fueron guardados");
+                String generoS = (String) comboGenero.getSelectedItem();
+                char genero = generoS.charAt(0);
+                c.setEmpGenero(genero);
 
-            CrearModelo();
-            Cargar_Informacion();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            System.out.println("Problema el guardar datos");
+              //  Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(txtFN.getText()); 
+                c.setEmpFechaNacimiento(dateNac.getDate());
+
+              //  Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(txtFC.getText()); 
+                c.setEmpFechaContratacion(dateCon.getDate());
+
+                c.setEmpSalario(Integer.parseInt(txtSalario.getText()));
+                c.setEmpCargo((String) comboCargo.getSelectedItem());
+
+              //  Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(txtFD.getText()); 
+                c.setEmpFechaDespido(null);           
+
+                cEmpleados.create(c);
+                System.out.println("Los datos fueron guardados");
+
+                CrearModelo();
+                Cargar_Informacion();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                System.out.println("Problema el guardar datos");
+            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        try{
-            cEdit.setEmpNombre(txtNombre.getText());
-            cEdit.setEmpApellido(txtApellido.getText());
-            
-            String generoS = (String) comboGenero.getSelectedItem();
-            char genero = generoS.charAt(0);
-            cEdit.setEmpGenero(genero);
+        int resp = JOptionPane.showConfirmDialog(this, "Esta seguro de realizar la operacion?", "Confirmacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            try{
+                cEdit.setEmpNombre(txtNombre.getText());
+                cEdit.setEmpApellido(txtApellido.getText());
 
-            cEdit.setEmpFechaNacimiento(dateNac.getDate());
-            cEdit.setEmpFechaContratacion(dateCon.getDate());           
-            cEdit.setEmpSalario(Integer.parseInt(txtSalario.getText()));           
-            cEdit.setEmpCargo((String) comboCargo.getSelectedItem());
-            cEdit.setEmpFechaDespido(dateDes.getDate());           
+                String generoS = (String) comboGenero.getSelectedItem();
+                char genero = generoS.charAt(0);
+                cEdit.setEmpGenero(genero);
 
-            cEmpleados.edit(cEdit);
-            System.out.println("Se actualizo");
-            CrearModelo();
-            Cargar_Informacion();
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.toString() + "error");
-            System.out.println("Error al actualizar");
-        }   
+                cEdit.setEmpFechaNacimiento(dateNac.getDate());
+                cEdit.setEmpFechaContratacion(dateCon.getDate());           
+                cEdit.setEmpSalario(Integer.parseInt(txtSalario.getText()));           
+                cEdit.setEmpCargo((String) comboCargo.getSelectedItem());
+                cEdit.setEmpFechaDespido(dateDes.getDate());           
+
+                cEmpleados.edit(cEdit);
+                System.out.println("Se actualizo");
+                CrearModelo();
+                Cargar_Informacion();
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null, e.toString() + "error");
+                System.out.println("Error al actualizar");
+            }   
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
@@ -361,6 +328,7 @@ public class gestionar_empleados extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dateCon;
     private com.toedter.calendar.JDateChooser dateDes;
     private com.toedter.calendar.JDateChooser dateNac;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtApellido;

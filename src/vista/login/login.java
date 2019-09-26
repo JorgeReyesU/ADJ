@@ -7,11 +7,14 @@ package vista.login;
 
 import vista.admin.router;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.List;
 import javax.swing.BorderFactory;
 import modelo.Accounts;
 import org.apache.commons.codec.digest.DigestUtils;
 import persistencia.AccountsJpaController;
+import vista.seller.facturacion;
+import vista.worker.pedidos;
 
 /**
  *
@@ -25,6 +28,8 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+        this.setLocationRelativeTo(null); 
+        this.setMinimumSize(new Dimension(1400, 900));
     }
 
     /**
@@ -40,48 +45,33 @@ public class login extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         txtPass = new javax.swing.JPasswordField();
         txtMess = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtUser.setText("User");
+        txtUser.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtUser.setText("admin");
+        getContentPane().add(txtUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 500, 250, 50));
 
-        btnLogin.setText("Login");
+        btnLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Entrar.png"))); // NOI18N
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
             }
         });
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 740, 420, 60));
 
-        txtPass.setText("Password");
+        txtPass.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtPass.setText("123");
+        getContentPane().add(txtPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 610, 250, 50));
 
+        txtMess.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         txtMess.setForeground(java.awt.Color.red);
+        getContentPane().add(txtMess, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 682, 310, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(262, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtUser)
-                    .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPass, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                    .addComponent(txtMess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(257, 257, 257))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
-                .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtMess, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
-                .addComponent(btnLogin)
-                .addGap(133, 133, 133))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Inicio.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,9 +102,13 @@ public class login extends javax.swing.JFrame {
                     window.setVisible(true);
                     this.dispose();
                 }else if (userAccount.getEmpDni().getEmpCargo().equals("seller")) {
-                    // Ruta para modulo Seller
+                    facturacion window = new facturacion();
+                    window.setVisible(true);
+                    this.dispose();
                 }else if (userAccount.getEmpDni().getEmpCargo().equals("worker")) {
-                    // Ruta para modulo Worker
+                    pedidos window = new pedidos();
+                    window.setVisible(true);
+                    this.dispose();
                 }
             }else{
                 txtUser.setBorder(BorderFactory.createLineBorder(Color.gray, 1));
@@ -161,6 +155,7 @@ public class login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel txtMess;
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JTextField txtUser;

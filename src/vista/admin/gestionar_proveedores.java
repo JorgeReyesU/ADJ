@@ -26,7 +26,7 @@ public class gestionar_proveedores extends javax.swing.JFrame {
      */
     public gestionar_proveedores() {
         initComponents();
-        this.setMinimumSize(new Dimension(1400, 680));
+        this.setMinimumSize(new Dimension(1400, 650));
         this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
@@ -51,29 +51,39 @@ public class gestionar_proveedores extends javax.swing.JFrame {
         bActualizar = new javax.swing.JButton();
         txtTelefono = new javax.swing.JTextField();
         txtNIT = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtDireccion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDireccionActionPerformed(evt);
             }
         });
+        getContentPane().add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, 230, 30));
 
-        bSeleccionar.setText("Seleccionar");
+        bSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bSeleccionar.png"))); // NOI18N
         bSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bSeleccionarActionPerformed(evt);
             }
         });
+        getContentPane().add(bSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 470, 200, 50));
 
-        bGuardar.setText("Guardar");
+        txtEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 290, 230, 30));
+
+        bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bGuardar.png"))); // NOI18N
         bGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bGuardarActionPerformed(evt);
             }
         });
+        getContentPane().add(bGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 530, 200, 50));
 
+        tabla.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -87,68 +97,27 @@ public class gestionar_proveedores extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        bActualizar.setText("Actualizar");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 19, 850, 590));
+
+        txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 230, 30));
+
+        bActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bActualizar.png"))); // NOI18N
         bActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bActualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(bActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 470, 200, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1320, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(220, 220, 220)
-                            .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(190, 190, 190)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGap(70, 70, 70)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 830, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 638, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addComponent(txtNIT, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(180, 180, 180)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(30, 30, 30)
-                            .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 230, 30));
+
+        txtNIT.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtNIT, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 230, 30));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Gestionar_Proveedores.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -168,40 +137,48 @@ public class gestionar_proveedores extends javax.swing.JFrame {
     }//GEN-LAST:event_bSeleccionarActionPerformed
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-        try {
-            Proveedores c = new Proveedores();
+        int resp = JOptionPane.showConfirmDialog(this, "Esta seguro de realizar la operacion?", "Confirmacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            try {
+                Proveedores c = new Proveedores();
 
-            c.setProNIT(txtNIT.getText());
-            c.setProNombre(txtNombre.getText());
-            c.setProTelefono(txtTelefono.getText());
-            c.setProDireccion(txtDireccion.getText());
-            c.setProEmail(txtEmail.getText());
+                c.setProNIT(txtNIT.getText());
+                c.setProNombre(txtNombre.getText());
+                c.setProTelefono(txtTelefono.getText());
+                c.setProDireccion(txtDireccion.getText());
+                c.setProEmail(txtEmail.getText());
 
-            cProveedores.create(c);
-            System.out.println("Los datos fueron guardados");
+                cProveedores.create(c);
+                System.out.println("Los datos fueron guardados");
 
-            CrearModelo();
-            Cargar_Informacion();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            System.out.println("Problema el guardar datos");
+                CrearModelo();
+                Cargar_Informacion();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                System.out.println("Problema el guardar datos");
+            }
         }
     }//GEN-LAST:event_bGuardarActionPerformed
 
     private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
-        try{
-            cEdit.setProNombre(txtNombre.getText());
-            cEdit.setProTelefono(txtTelefono.getText());
-            cEdit.setProDireccion(txtDireccion.getText());
-            cEdit.setProEmail(txtEmail.getText());
+        int resp = JOptionPane.showConfirmDialog(this, "Esta seguro de realizar la operacion?", "Confirmacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            try{
+                cEdit.setProNombre(txtNombre.getText());
+                cEdit.setProTelefono(txtTelefono.getText());
+                cEdit.setProDireccion(txtDireccion.getText());
+                cEdit.setProEmail(txtEmail.getText());
 
-            cProveedores.edit(cEdit);
-            System.out.println("Se actualizo");
-            CrearModelo();
-            Cargar_Informacion();
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.toString() + "error");
-            System.out.println("Error al actualizar");
+                cProveedores.edit(cEdit);
+                System.out.println("Se actualizo");
+                CrearModelo();
+                Cargar_Informacion();
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null, e.toString() + "error");
+                System.out.println("Error al actualizar");
+            }
         }
     }//GEN-LAST:event_bActualizarActionPerformed
 
@@ -300,6 +277,7 @@ public class gestionar_proveedores extends javax.swing.JFrame {
     private javax.swing.JButton bActualizar;
     private javax.swing.JButton bGuardar;
     private javax.swing.JButton bSeleccionar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtDireccion;

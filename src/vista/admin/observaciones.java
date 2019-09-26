@@ -15,6 +15,7 @@ import modelo.Empleados;
 import modelo.Observaciones;
 import persistencia.EmpleadosJpaController;
 import persistencia.ObservacionesJpaController;
+import vista.login.login;
 
 /**
  *
@@ -31,7 +32,7 @@ public class observaciones extends javax.swing.JFrame {
      */
     public observaciones() {
         initComponents();
-        this.setMinimumSize(new Dimension(1000, 680));
+        this.setMinimumSize(new Dimension(1000, 650));
         this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
@@ -58,8 +59,14 @@ public class observaciones extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         btnDil = new javax.swing.JButton();
+        btnGestionar = new javax.swing.JButton();
+        btnObser = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnRouter = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,39 +81,50 @@ public class observaciones extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        btnDil.setText("Diligenciada");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 760, 510));
+
+        btnDil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bEjecutar.png"))); // NOI18N
         btnDil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDilActionPerformed(evt);
             }
         });
+        getContentPane().add(btnDil, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 570, 200, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(441, Short.MAX_VALUE)
-                .addComponent(btnDil, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(400, 400, 400))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(64, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(64, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(606, Short.MAX_VALUE)
-                .addComponent(btnDil)
-                .addGap(26, 26, 26))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(28, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(73, Short.MAX_VALUE)))
-        );
+        btnGestionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bGestionar.png"))); // NOI18N
+        btnGestionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnGestionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 80, 80));
+
+        btnObser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bObservaciones.png"))); // NOI18N
+        btnObser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObserActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnObser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 80, 80));
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bExit.png"))); // NOI18N
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 90, 100));
+
+        btnRouter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bInicio.png"))); // NOI18N
+        btnRouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRouterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRouter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, 80, 80));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/SmallWin.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -124,6 +142,30 @@ public class observaciones extends javax.swing.JFrame {
             System.out.println("Error al actualizar");
         }
     }//GEN-LAST:event_btnDilActionPerformed
+
+    private void btnGestionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarActionPerformed
+        gestionar window = new gestionar();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGestionarActionPerformed
+
+    private void btnObserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObserActionPerformed
+        observaciones window = new observaciones();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnObserActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        login window = new login();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnRouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRouterActionPerformed
+        router window = new router();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRouterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,6 +260,11 @@ public class observaciones extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDil;
+    private javax.swing.JButton btnGestionar;
+    private javax.swing.JButton btnObser;
+    private javax.swing.JButton btnRouter;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables

@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Productos;
 import persistencia.ProductosJpaController;
+import vista.login.login;
 
 /**
  *
@@ -26,7 +27,7 @@ public class stock_utileria extends javax.swing.JFrame {
      */
     public stock_utileria() {
         initComponents();
-        this.setMinimumSize(new Dimension(1420, 950));
+        this.setMinimumSize(new Dimension(1400, 900));
         this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
@@ -45,8 +46,16 @@ public class stock_utileria extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
         bAgregar = new javax.swing.JButton();
         txtAgregar = new javax.swing.JTextField();
+        btnSalir = new javax.swing.JButton();
+        btnObs = new javax.swing.JButton();
+        btnMPrimas = new javax.swing.JButton();
+        btnSFabrica = new javax.swing.JButton();
+        btnSUtileria = new javax.swing.JButton();
+        btnPedidos = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -61,60 +70,128 @@ public class stock_utileria extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        bAgregar.setText("Agregar");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 1210, 740));
+
+        bAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bAgregar.png"))); // NOI18N
         bAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bAgregarActionPerformed(evt);
             }
         });
+        getContentPane().add(bAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 20, 190, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(748, 748, 748)
-                        .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        txtAgregar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 40, 206, 30));
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bExit.png"))); // NOI18N
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 810, 90, -1));
+
+        btnObs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bObservaciones.png"))); // NOI18N
+        btnObs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 670, 82, 84));
+
+        btnMPrimas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockM.png"))); // NOI18N
+        btnMPrimas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMPrimasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnMPrimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 82, 80));
+
+        btnSFabrica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockF.png"))); // NOI18N
+        btnSFabrica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSFabricaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSFabrica, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 82, 82));
+
+        btnSUtileria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockU.png"))); // NOI18N
+        btnSUtileria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSUtileriaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSUtileria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 83, 81));
+
+        btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bPedidos.png"))); // NOI18N
+        btnPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 83, 83));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Fabrica_SU.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
-        cEdit = cProductos.findProductos((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
-        // int num = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
-        // OEdit = cOrdenes.findOrdenes(num);
-        int cantidadP = cEdit.getProdCantidad();
-        int cantidadA = Integer.parseInt(txtAgregar.getText());
-        cEdit.setProdCantidad(cantidadP + cantidadA);
-        try {
-            cProductos.edit(cEdit);
-            CrearModelo();
-            Cargar_Informacion();
-        } catch (Exception e) {
-            System.out.println("Error al agregar producto");
+        int resp = JOptionPane.showConfirmDialog(this, "Esta seguro de realizar la operacion?", "Confirmacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            cEdit = cProductos.findProductos((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
+            // int num = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
+            // OEdit = cOrdenes.findOrdenes(num);
+            int cantidadP = cEdit.getProdCantidad();
+            int cantidadA = Integer.parseInt(txtAgregar.getText());
+            cEdit.setProdCantidad(cantidadP + cantidadA);
+            try {
+                cProductos.edit(cEdit);
+                CrearModelo();
+                Cargar_Informacion();
+            } catch (Exception e) {
+                System.out.println("Error al agregar producto");
+            }
         }
     }//GEN-LAST:event_bAgregarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        login window = new login();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnObsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObsActionPerformed
+        observaciones window = new observaciones();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnObsActionPerformed
+
+    private void btnMPrimasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMPrimasActionPerformed
+        mprimas window = new mprimas();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMPrimasActionPerformed
+
+    private void btnSFabricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSFabricaActionPerformed
+        stock_fabrica window = new stock_fabrica();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSFabricaActionPerformed
+
+    private void btnSUtileriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUtileriaActionPerformed
+        stock_utileria window = new stock_utileria();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSUtileriaActionPerformed
+
+    private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
+        pedidos window = new pedidos();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnPedidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,6 +295,13 @@ public class stock_utileria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAgregar;
+    private javax.swing.JButton btnMPrimas;
+    private javax.swing.JButton btnObs;
+    private javax.swing.JButton btnPedidos;
+    private javax.swing.JButton btnSFabrica;
+    private javax.swing.JButton btnSUtileria;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtAgregar;

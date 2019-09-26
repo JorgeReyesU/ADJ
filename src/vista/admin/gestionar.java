@@ -5,6 +5,9 @@
  */
 package vista.admin;
 
+import java.awt.Dimension;
+import vista.login.login;
+
 /**
  *
  * @author reyes
@@ -16,6 +19,8 @@ public class gestionar extends javax.swing.JFrame {
      */
     public gestionar() {
         initComponents();
+        this.setLocationRelativeTo(null); 
+        this.setMinimumSize(new Dimension(1000, 650));
     }
 
     /**
@@ -27,21 +32,147 @@ public class gestionar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        btnClientes = new javax.swing.JButton();
+        btnEmpleados = new javax.swing.JButton();
+        btnMPrimas = new javax.swing.JButton();
+        btnProductos = new javax.swing.JButton();
+        btnProv = new javax.swing.JButton();
+        btnObser = new javax.swing.JButton();
+        btnGestionar = new javax.swing.JButton();
+        btnRouter = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar_bClientes.png"))); // NOI18N
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClientesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 410, 440, 120));
+
+        btnEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar_bEmpleados.png"))); // NOI18N
+        btnEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmpleadosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEmpleados, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 440, 120));
+
+        btnMPrimas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar_bMPrimas.png"))); // NOI18N
+        btnMPrimas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMPrimasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnMPrimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 560, 440, 120));
+
+        btnProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar_bProductos.png"))); // NOI18N
+        btnProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 710, 430, 120));
+
+        btnProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar_bProveedores.png"))); // NOI18N
+        btnProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProvActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 560, 500, 120));
+
+        btnObser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bObservaciones.png"))); // NOI18N
+        btnObser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObserActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnObser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 280, 80, 80));
+
+        btnGestionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bGestionar.png"))); // NOI18N
+        btnGestionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnGestionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 80, 80));
+
+        btnRouter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bInicio.png"))); // NOI18N
+        btnRouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRouterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRouter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 80, 80));
+
+        btnSalir.setBackground(new java.awt.Color(255, 255, 255));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bExit.png"))); // NOI18N
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 800, 90, 100));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGestionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionarActionPerformed
+        gestionar window = new gestionar();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGestionarActionPerformed
+
+    private void btnObserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObserActionPerformed
+        observaciones window = new observaciones();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnObserActionPerformed
+
+    private void btnRouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRouterActionPerformed
+        router window = new router();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRouterActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        login window = new login();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
+        gestionar_clientes window = new gestionar_clientes();
+        window.setVisible(true);
+    }//GEN-LAST:event_btnClientesActionPerformed
+
+    private void btnEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmpleadosActionPerformed
+        gestionar_empleados window = new gestionar_empleados();
+        window.setVisible(true);
+    }//GEN-LAST:event_btnEmpleadosActionPerformed
+
+    private void btnMPrimasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMPrimasActionPerformed
+        gestionar_mprimas window = new gestionar_mprimas();
+        window.setVisible(true);
+    }//GEN-LAST:event_btnMPrimasActionPerformed
+
+    private void btnProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosActionPerformed
+        gestionar_productos window = new gestionar_productos();
+        window.setVisible(true);
+    }//GEN-LAST:event_btnProductosActionPerformed
+
+    private void btnProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProvActionPerformed
+        gestionar_proveedores window = new gestionar_proveedores();
+        window.setVisible(true);
+    }//GEN-LAST:event_btnProvActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +210,15 @@ public class gestionar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClientes;
+    private javax.swing.JButton btnEmpleados;
+    private javax.swing.JButton btnGestionar;
+    private javax.swing.JButton btnMPrimas;
+    private javax.swing.JButton btnObser;
+    private javax.swing.JButton btnProductos;
+    private javax.swing.JButton btnProv;
+    private javax.swing.JButton btnRouter;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

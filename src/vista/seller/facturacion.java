@@ -18,6 +18,7 @@ import persistencia.ClientesJpaController;
 import persistencia.DetallesordenJpaController;
 import persistencia.OrdenesJpaController;
 import persistencia.ProductosJpaController;
+import vista.login.login;
 
 /**
  *
@@ -67,9 +68,17 @@ public class facturacion extends javax.swing.JFrame {
         txtCantidad = new javax.swing.JTextField();
         comboColor = new javax.swing.JComboBox<>();
         comboProducto = new javax.swing.JComboBox<>();
+        btnSalir = new javax.swing.JButton();
+        btnObservaciones = new javax.swing.JButton();
+        btnSFabrica = new javax.swing.JButton();
+        btnSUtileria = new javax.swing.JButton();
+        btnFact = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tabla.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -83,48 +92,69 @@ public class facturacion extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 1230, 480));
+
+        bCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bCliente.setText("Registrar - Modificar");
         bCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bClienteActionPerformed(evt);
             }
         });
+        getContentPane().add(bCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 780, -1, 30));
 
+        bDescuento.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bDescuento.setText("Eplicar Desc.");
         bDescuento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bDescuentoActionPerformed(evt);
             }
         });
+        getContentPane().add(bDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 780, 149, 30));
 
+        comboClientes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        comboClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboClientesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(comboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 680, 190, 30));
+
+        bFinalizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bFinalizar.setText("Finalizar");
         bFinalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bFinalizarActionPerformed(evt);
             }
         });
+        getContentPane().add(bFinalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 830, 130, 30));
 
+        bPagar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         bPagar.setText("Pagar");
         bPagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bPagarActionPerformed(evt);
             }
         });
+        getContentPane().add(bPagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 830, 130, 30));
 
         labelTotal.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelTotal.setForeground(new java.awt.Color(58, 58, 128));
         labelTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelTotal.setText("-");
+        getContentPane().add(labelTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 780, 127, 30));
 
         labelDescuento.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelDescuento.setForeground(new java.awt.Color(58, 58, 128));
         labelDescuento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelDescuento.setText("0");
+        getContentPane().add(labelDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 720, 127, 30));
 
         labelSubtotal.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelSubtotal.setForeground(new java.awt.Color(58, 58, 128));
         labelSubtotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelSubtotal.setText("-");
+        getContentPane().add(labelSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1200, 660, 127, 40));
 
         bEliminar.setText("Eliminar");
         bEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +162,7 @@ public class facturacion extends javax.swing.JFrame {
                 bEliminarActionPerformed(evt);
             }
         });
+        getContentPane().add(bEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1270, 20, 103, 30));
 
         bAgregar.setText("Agregar");
         bAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +170,7 @@ public class facturacion extends javax.swing.JFrame {
                 bAgregarActionPerformed(evt);
             }
         });
+        getContentPane().add(bAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 20, 95, 30));
 
         txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         txtCantidad.setForeground(new java.awt.Color(58, 58, 128));
@@ -148,85 +180,56 @@ public class facturacion extends javax.swing.JFrame {
                 txtCantidadActionPerformed(evt);
             }
         });
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, 157, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(112, Short.MAX_VALUE)
-                        .addComponent(comboProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(131, 131, 131)
-                        .addComponent(comboColor, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117)
-                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(123, 123, 123)
-                        .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(188, Short.MAX_VALUE)
-                        .addComponent(comboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(750, 750, 750)
-                        .addComponent(labelSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(148, Short.MAX_VALUE)
-                        .addComponent(bDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(821, 821, 821)
-                        .addComponent(labelDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(1118, Short.MAX_VALUE)
-                        .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(1096, Short.MAX_VALUE)
-                        .addComponent(bCliente))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(756, Short.MAX_VALUE)
-                        .addComponent(bFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(229, 229, 229)
-                        .addComponent(bPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(comboProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboColor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(comboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(labelSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(bDescuento))
-                    .addComponent(labelDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(bCliente)
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        comboColor.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(comboColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, 193, 30));
+
+        comboProducto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(comboProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 169, 30));
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bExit.png"))); // NOI18N
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 800, 90, 100));
+
+        btnObservaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bObservaciones.png"))); // NOI18N
+        btnObservaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObservacionesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnObservaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 80, 80));
+
+        btnSFabrica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockF.png"))); // NOI18N
+        btnSFabrica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSFabricaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSFabrica, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 80, 80));
+
+        btnSUtileria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockU.png"))); // NOI18N
+        btnSUtileria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSUtileriaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSUtileria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 80, 80));
+
+        btnFact.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/venta_bFacturacion.png"))); // NOI18N
+        btnFact.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFactActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnFact, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 80, 80));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Venta_Facturacion.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -360,6 +363,8 @@ public class facturacion extends javax.swing.JFrame {
 
                 logica_venta_facturacion.agregarItemTabla(contadorAgregar, prodNombre, prodColor, cantidadP, unidad, valorU, totalP);
                 contadorAgregar++;
+                logica_venta_facturacion.subtotalL(contadorAgregar, totalP); //Subtotal
+                logica_venta_facturacion.totalL();
             } else {
                 JOptionPane.showMessageDialog(null, "No existe en stock la cantidad solicitada de este producto. \n"
                     + "Solo quedan: " + cantidadProd + " Unidades de " + prodNombre);
@@ -368,13 +373,46 @@ public class facturacion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ingrese una cantidad mayor a 0.");
         }
         //JOptionPane.showMessageDialog(null, totalP);
-        logica_venta_facturacion.subtotalL(contadorAgregar, totalP); //Subtotal
-        logica_venta_facturacion.totalL();
+        
     }//GEN-LAST:event_bAgregarActionPerformed
 
     private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCantidadActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        login window = new login();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFactActionPerformed
+        facturacion window = new facturacion();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnFactActionPerformed
+
+    private void btnSUtileriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUtileriaActionPerformed
+        stock_utileria window = new stock_utileria();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSUtileriaActionPerformed
+
+    private void btnSFabricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSFabricaActionPerformed
+        stock_fabrica window = new stock_fabrica();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSFabricaActionPerformed
+
+    private void btnObservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObservacionesActionPerformed
+        observacion window = new observacion();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnObservacionesActionPerformed
+
+    private void comboClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboClientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -481,9 +519,15 @@ public class facturacion extends javax.swing.JFrame {
     private javax.swing.JButton bEliminar;
     private javax.swing.JButton bFinalizar;
     private javax.swing.JButton bPagar;
+    private javax.swing.JButton btnFact;
+    private javax.swing.JButton btnObservaciones;
+    private javax.swing.JButton btnSFabrica;
+    private javax.swing.JButton btnSUtileria;
+    private javax.swing.JButton btnSalir;
     public static javax.swing.JComboBox<String> comboClientes;
     private javax.swing.JComboBox<String> comboColor;
     private javax.swing.JComboBox<String> comboProducto;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel labelDescuento;
     public static javax.swing.JLabel labelSubtotal;

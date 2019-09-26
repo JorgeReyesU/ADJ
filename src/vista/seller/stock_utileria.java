@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Productos;
 import modelo.Proveedores;
 import persistencia.ProductosJpaController;
+import vista.login.login;
 
 /**
  *
@@ -21,11 +22,10 @@ public class stock_utileria extends javax.swing.JFrame {
     
     public stock_utileria() {
         initComponents();
-        this.setMinimumSize(new Dimension(1000, 680));
+        this.setMinimumSize(new Dimension(1400, 900));
         this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
-    
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -33,8 +33,15 @@ public class stock_utileria extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
+        btnFact = new javax.swing.JButton();
+        btnSUtileria = new javax.swing.JButton();
+        btnSFabrica = new javax.swing.JButton();
+        btnObservaciones = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -49,29 +56,83 @@ public class stock_utileria extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 869, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 850, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 616, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 1210, 740));
+
+        btnFact.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/venta_bFacturacion.png"))); // NOI18N
+        btnFact.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFactActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnFact, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 80, 80));
+
+        btnSUtileria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockU.png"))); // NOI18N
+        btnSUtileria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSUtileriaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSUtileria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 80, 80));
+
+        btnSFabrica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockF.png"))); // NOI18N
+        btnSFabrica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSFabricaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSFabrica, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 380, 80, 80));
+
+        btnObservaciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bObservaciones.png"))); // NOI18N
+        btnObservaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObservacionesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnObservaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 520, 80, 80));
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bExit.png"))); // NOI18N
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 800, 90, 100));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Fabrica_SU.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 900));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnFactActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFactActionPerformed
+        facturacion window = new facturacion();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnFactActionPerformed
+
+    private void btnSUtileriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUtileriaActionPerformed
+        stock_utileria window = new stock_utileria();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSUtileriaActionPerformed
+
+    private void btnSFabricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSFabricaActionPerformed
+        stock_fabrica window = new stock_fabrica();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSFabricaActionPerformed
+
+    private void btnObservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObservacionesActionPerformed
+        observacion window = new observacion();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnObservacionesActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        login window = new login();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     public static void main(String args[]) {
 
@@ -151,6 +212,12 @@ public class stock_utileria extends javax.swing.JFrame {
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnFact;
+    private javax.swing.JButton btnObservaciones;
+    private javax.swing.JButton btnSFabrica;
+    private javax.swing.JButton btnSUtileria;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables

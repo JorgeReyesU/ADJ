@@ -5,6 +5,10 @@
  */
 package vista.admin;
 
+import java.awt.Dimension;
+import vista.seller.facturacion;
+import vista.worker.pedidos;
+
 /**
  *
  * @author reyes
@@ -16,6 +20,8 @@ public class router extends javax.swing.JFrame {
      */
     public router() {
         initComponents();
+        this.setLocationRelativeTo(null); 
+        this.setMinimumSize(new Dimension(1000, 650));
     }
 
     /**
@@ -30,41 +36,64 @@ public class router extends javax.swing.JFrame {
         btnAdmin = new javax.swing.JButton();
         btnSeller = new javax.swing.JButton();
         btnWorker = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnAdmin.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
+        btnAdmin.setForeground(new java.awt.Color(0, 0, 102));
         btnAdmin.setText("Admin");
+        btnAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdminActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 210, 160));
 
+        btnSeller.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
+        btnSeller.setForeground(new java.awt.Color(0, 0, 102));
         btnSeller.setText("Seller");
+        btnSeller.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSellerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSeller, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, 210, 160));
 
+        btnWorker.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
+        btnWorker.setForeground(new java.awt.Color(0, 0, 102));
         btnWorker.setText("Worker");
+        btnWorker.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWorkerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnWorker, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 250, 210, 160));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSeller, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnWorker, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(332, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(246, 246, 246)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeller, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnWorker, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(252, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/SmallWin.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
+        gestionar window = new gestionar();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnAdminActionPerformed
+
+    private void btnSellerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSellerActionPerformed
+        facturacion window = new facturacion();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSellerActionPerformed
+
+    private void btnWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkerActionPerformed
+        pedidos window = new pedidos();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnWorkerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,5 +134,6 @@ public class router extends javax.swing.JFrame {
     private javax.swing.JButton btnAdmin;
     private javax.swing.JButton btnSeller;
     private javax.swing.JButton btnWorker;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

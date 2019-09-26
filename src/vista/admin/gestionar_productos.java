@@ -28,7 +28,7 @@ public class gestionar_productos extends javax.swing.JFrame {
      */
     public gestionar_productos() {
         initComponents();
-        this.setMinimumSize(new Dimension(1400, 680));
+        this.setMinimumSize(new Dimension(1400, 650));
         this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
@@ -55,23 +55,48 @@ public class gestionar_productos extends javax.swing.JFrame {
         bActualizar = new javax.swing.JButton();
         comboUnidad = new javax.swing.JComboBox<>();
         comboProv = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bSeleccionar.setText("Seleccionar");
+        bSeleccionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bSeleccionar.png"))); // NOI18N
         bSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bSeleccionarActionPerformed(evt);
             }
         });
+        getContentPane().add(bSeleccionar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 500, 200, 50));
 
-        bGuardar.setText("Guardar");
+        txtNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 200, 30));
+
+        txtDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 200, 30));
+
+        txtCantidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 200, 30));
+
+        txtPrecioV.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtPrecioV, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 290, 200, 30));
+
+        txtPrecioC.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(txtPrecioC, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 200, 30));
+
+        bGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bGuardar.png"))); // NOI18N
         bGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bGuardarActionPerformed(evt);
             }
         });
+        getContentPane().add(bGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 560, 200, 50));
 
+        tabla.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -85,74 +110,25 @@ public class gestionar_productos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        bActualizar.setText("Actualizar");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, 770, 590));
+
+        bActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bActualizar.png"))); // NOI18N
         bActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bActualizarActionPerformed(evt);
             }
         });
+        getContentPane().add(bActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 500, 200, 50));
 
+        comboUnidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         comboUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Kg", "Gal" }));
+        getContentPane().add(comboUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 200, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(comboProv, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(876, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(40, 40, 40)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(comboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPrecioV, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtPrecioC, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(62, 62, 62)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 810, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(419, Short.MAX_VALUE)
-                .addComponent(comboProv, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(248, 248, 248))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(459, 459, 459)
-                            .addComponent(bActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(59, 59, 59)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(comboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(txtPrecioV, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(txtPrecioC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(120, 120, 120)
-                            .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(40, 40, 40)
-                            .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        comboProv.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        getContentPane().add(comboProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, 200, 31));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Gestionar_Productos.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1400, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -164,7 +140,7 @@ public class gestionar_productos extends javax.swing.JFrame {
         txtCantidad.setText(tabla.getValueAt(tabla.getSelectedRow(), 4).toString());
         txtPrecioC.setText(tabla.getValueAt(tabla.getSelectedRow(), 5).toString());
         txtPrecioV.setText(tabla.getValueAt(tabla.getSelectedRow(), 6).toString());
-        comboProv.addItem(modelo.getValueAt(tabla.getSelectedRow(), 7).toString());
+        comboProv.setSelectedItem(modelo.getValueAt(tabla.getSelectedRow(), 7).toString());
 
         //Productos produc = new Productos();
         //produc.se
@@ -172,46 +148,58 @@ public class gestionar_productos extends javax.swing.JFrame {
     }//GEN-LAST:event_bSeleccionarActionPerformed
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-        try {
-            Productos c = new Productos();
+        int resp = JOptionPane.showConfirmDialog(this, "Esta seguro de realizar la operacion?", "Confirmacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            try {
+                Productos c = new Productos();
 
-            c.setProdNombre(txtNombre.getText());
-            c.setProdDescripcion(txtDescripcion.getText());
-            c.setProdUnidadMedida((String) comboUnidad.getSelectedItem());
-            c.setProdCantidad(Integer.parseInt(txtCantidad.getText()));
-            c.setProdPrecioVenta(Integer.parseInt(txtPrecioV.getText()));
-            c.setProdPrecioComprado(Integer.parseInt(txtPrecioC.getText()));
-            c.setProNIT(cProveedores.findProveedores(comboProv.getSelectedItem().toString()));
+                c.setProdNombre(txtNombre.getText());
+                c.setProdDescripcion(txtDescripcion.getText());
+                c.setProdUnidadMedida((String) comboUnidad.getSelectedItem());
+                c.setProdCantidad(Integer.parseInt(txtCantidad.getText()));
+                c.setProdPrecioVenta(Integer.parseInt(txtPrecioV.getText()));
+                c.setProdPrecioComprado(Integer.parseInt(txtPrecioC.getText()));
+                c.setProNIT(cProveedores.findProveedores(comboProv.getSelectedItem().toString()));
 
-            cProductos.create(c);
-            System.out.println("Los datos fueron guardados");
+                cProductos.create(c);
+                System.out.println("Los datos fueron guardados");
 
-            CrearModelo();
-            Cargar_Informacion();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            System.out.println("Problema el guardar datos");
+                CrearModelo();
+                Cargar_Informacion();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                System.out.println("Problema el guardar datos");
+            }
         }
     }//GEN-LAST:event_bGuardarActionPerformed
 
     private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
-        try{
-            cEdit.setProdNombre(txtNombre.getText());
-            cEdit.setProdDescripcion(txtDescripcion.getText());
-            cEdit.setProdCantidad(Integer.parseInt(txtCantidad.getText()));
-            cEdit.setProdPrecioComprado(Integer.parseInt(txtPrecioC.getText()));
-            cEdit.setProdPrecioVenta(Integer.parseInt(txtPrecioV.getText()));
-            cEdit.setProNIT(cProveedores.findProveedores(comboProv.getSelectedItem().toString()));
+        int resp = JOptionPane.showConfirmDialog(this, "Esta seguro de realizar la operacion?", "Confirmacion",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            try{
+                cEdit.setProdNombre(txtNombre.getText());
+                cEdit.setProdDescripcion(txtDescripcion.getText());
+                cEdit.setProdCantidad(Integer.parseInt(txtCantidad.getText()));
+                cEdit.setProdPrecioComprado(Integer.parseInt(txtPrecioC.getText()));
+                cEdit.setProdPrecioVenta(Integer.parseInt(txtPrecioV.getText()));
+                cEdit.setProNIT(cProveedores.findProveedores(comboProv.getSelectedItem().toString()));
 
-            cProductos.edit(cEdit);
-            System.out.println("Se actualizo");
-            CrearModelo();
-            Cargar_Informacion();
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, e.toString() + "error");
-            System.out.println("Error al actualizar");
+                cProductos.edit(cEdit);
+                System.out.println("Se actualizo");
+                CrearModelo();
+                Cargar_Informacion();
+            }catch (Exception e){
+                JOptionPane.showMessageDialog(null, e.toString() + "error");
+                System.out.println("Error al actualizar");
+            }
         }
     }//GEN-LAST:event_bActualizarActionPerformed
+
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,6 +309,7 @@ public class gestionar_productos extends javax.swing.JFrame {
     private javax.swing.JButton bSeleccionar;
     private javax.swing.JComboBox<String> comboProv;
     private javax.swing.JComboBox<String> comboUnidad;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtCantidad;

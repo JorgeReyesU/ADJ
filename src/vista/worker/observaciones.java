@@ -14,6 +14,7 @@ import modelo.Empleados;
 import modelo.Observaciones;
 import persistencia.EmpleadosJpaController;
 import persistencia.ObservacionesJpaController;
+import vista.login.login;
 
 /**
  *
@@ -33,7 +34,7 @@ public class observaciones extends javax.swing.JFrame {
      */
     public observaciones() {
         initComponents();
-        this.setMinimumSize(new Dimension(1000, 680));
+        this.setMinimumSize(new Dimension(1000, 650));
         this.setLocationRelativeTo(null);
     }
 
@@ -49,65 +50,141 @@ public class observaciones extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtObservacion = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
+        btnPedidos = new javax.swing.JButton();
+        btnSUtileria = new javax.swing.JButton();
+        btnSFabrica = new javax.swing.JButton();
+        btnMPrimas = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        btnObs = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtObservacion.setColumns(20);
         txtObservacion.setRows(5);
         jScrollPane1.setViewportView(txtObservacion);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 25, 740, 500));
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bGuardar.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 560, 200, 50));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1031, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(539, 539, 539)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 663, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(29, 29, 29)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bPedidos.png"))); // NOI18N
+        btnPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 83, 83));
+
+        btnSUtileria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockU.png"))); // NOI18N
+        btnSUtileria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSUtileriaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSUtileria, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 83, 81));
+
+        btnSFabrica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockF.png"))); // NOI18N
+        btnSFabrica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSFabricaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSFabrica, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 82, 82));
+
+        btnMPrimas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockM.png"))); // NOI18N
+        btnMPrimas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMPrimasActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnMPrimas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 330, 82, 80));
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bExit.png"))); // NOI18N
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 550, 90, 100));
+
+        btnObs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bObservaciones.png"))); // NOI18N
+        btnObs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnObs, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 82, 84));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/SmallWin.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        try {
-            Observaciones c = new Observaciones();
-            List<Empleados> listE = cEmpleados.findEmpleadosEntities();
-            Empleados emp = listE.get(2);
-            c.setEmpDni(emp);
-            c.setObsDescripcion(txtObservacion.getText());
-            Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(fechaHoy);
-            c.setObsFecha(date1);
-            cObservaciones.create(c);
-            System.out.println("Los datos fueron guardados");
+    private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
+        pedidos window = new pedidos();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnPedidosActionPerformed
 
-            txtObservacion.setText("");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            System.out.println("Problema el guardar datos");
+    private void btnSUtileriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSUtileriaActionPerformed
+        stock_utileria window = new stock_utileria();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSUtileriaActionPerformed
+
+    private void btnSFabricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSFabricaActionPerformed
+        stock_fabrica window = new stock_fabrica();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSFabricaActionPerformed
+
+    private void btnMPrimasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMPrimasActionPerformed
+        mprimas window = new mprimas();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnMPrimasActionPerformed
+
+    private void btnObsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObsActionPerformed
+        observaciones window = new observaciones();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnObsActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        login window = new login();
+        window.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int resp = JOptionPane.showConfirmDialog(this, "Esta seguro que desea enviar esta observacion?", "Confirmacion",
+            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
+            try {
+                Observaciones c = new Observaciones();
+                List<Empleados> listE = cEmpleados.findEmpleadosEntities();
+                Empleados emp = listE.get(2);
+                c.setEmpDni(emp);
+                c.setObsDescripcion(txtObservacion.getText());
+                Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(fechaHoy);
+                c.setObsFecha(date1);
+                cObservaciones.create(c);
+                System.out.println("Los datos fueron guardados");
+
+                txtObservacion.setText("");
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+                System.out.println("Problema el guardar datos");
+            }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -147,7 +224,14 @@ public class observaciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnMPrimas;
+    private javax.swing.JButton btnObs;
+    private javax.swing.JButton btnPedidos;
+    private javax.swing.JButton btnSFabrica;
+    private javax.swing.JButton btnSUtileria;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton jButton3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtObservacion;
     // End of variables declaration//GEN-END:variables
