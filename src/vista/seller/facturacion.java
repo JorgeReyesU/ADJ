@@ -154,10 +154,9 @@ public class facturacion extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
+                        .addContainerGap(112, Short.MAX_VALUE)
                         .addComponent(comboProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(131, 131, 131)
                         .addComponent(comboColor, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,29 +166,32 @@ public class facturacion extends javax.swing.JFrame {
                         .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
                         .addComponent(bEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1230, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
+                        .addContainerGap(188, Short.MAX_VALUE)
                         .addComponent(comboClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(750, 750, 750)
                         .addComponent(labelSubtotal, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
+                        .addContainerGap(148, Short.MAX_VALUE)
                         .addComponent(bDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(821, 821, 821)
                         .addComponent(labelDescuento, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(1070, 1070, 1070)
+                        .addContainerGap(1118, Short.MAX_VALUE)
                         .addComponent(labelTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
+                        .addContainerGap(1096, Short.MAX_VALUE)
                         .addComponent(bCliente))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(711, 711, 711)
+                        .addContainerGap(756, Short.MAX_VALUE)
                         .addComponent(bFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(229, 229, 229)
                         .addComponent(bPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,20 +247,20 @@ public class facturacion extends javax.swing.JFrame {
                     if (pago.ordenN == 1) {
                         //    for (int i = 0; i < contadorAgregar; i++) {System.out.println(modelo.getValueAt(i, 0));}}}
                 try {
-                    for (int i = 0; i < contadorAgregar; i++) {                        
+                    for (int i = 0; i < contadorAgregar; i++) {
                         List<Productos> listP = cProductos.findProductosEntities();
                         String prodN = (String) modelo.getValueAt(i, 0);
                         int cantidadd = (Integer) modelo.getValueAt(i, 2);
                         int contadorw = 0;
-                        
-                        System.out.println("proN: " + prodN);
+
+                       // System.out.println("proN: " + prodN);
                         for (int j = 0; j < listP.size(); j++) {
                             if (prodN == listP.get(j).getProdNombre()) {
-                                System.out.println("Se agrego " + listP.get(i).getProdNombre());
+                               // System.out.println("Se agrego " + listP.get(i).getProdNombre());
                                 contadorw = listP.get(j).getProdCodigo();
                             }
                         }
-                        System.out.println("Contadorw: " + contadorw);
+                       // System.out.println("Contadorw: " + contadorw);
                         String color = (String) modelo.getValueAt(i, 1);
 
                         Detallesorden c = new Detallesorden();

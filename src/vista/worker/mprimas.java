@@ -5,17 +5,31 @@
  */
 package vista.worker;
 
+import java.awt.Dimension;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Materiasprimas;
+import persistencia.MateriasprimasJpaController;
+
 /**
  *
  * @author reyes
  */
 public class mprimas extends javax.swing.JFrame {
-
+    
+    MateriasprimasJpaController cMateriasprimas = new MateriasprimasJpaController();
+    Materiasprimas cEdit;
+    
     /**
      * Creates new form mprimas
      */
     public mprimas() {
         initComponents();
+        this.setMinimumSize(new Dimension(1420, 950));
+        this.setLocationRelativeTo(null);
+        CrearModelo();
+        Cargar_Informacion();
     }
 
     /**
@@ -27,21 +41,91 @@ public class mprimas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtCantidad = new javax.swing.JTextField();
+        bAgregar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCantidadActionPerformed(evt);
+            }
+        });
+
+        bAgregar.setText("Agregar");
+        bAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAgregarActionPerformed(evt);
+            }
+        });
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)
+                        .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCantidadActionPerformed
+
+    private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
+        try {
+            
+            int cod = (Integer) modelo.getValueAt(tabla.getSelectedRow(), 0);
+            cEdit = cMateriasprimas.findMateriasprimas(cod);
+            int cantidad = (int) modelo.getValueAt(tabla.getSelectedRow(), 4);
+
+            cEdit.setMatCatidad(cantidad + (Integer.parseInt(txtCantidad.getText())));
+
+            cMateriasprimas.edit(cEdit);
+            System.out.println("Se actualizo");
+            CrearModelo();
+            Cargar_Informacion();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Error al actualizar");
+        }
+    }//GEN-LAST:event_bAgregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,7 +161,72 @@ public class mprimas extends javax.swing.JFrame {
             }
         });
     }
+    
+    DefaultTableModel modelo;
+    private void CrearModelo() {
+        try {
+            modelo = (new DefaultTableModel(
+                    null, new String[]{
+                        "Codigo", "Nombre", "Descripcion",
+                        "Unidad", "Cantidad", "P. Comprado",
+                        "Proveedor"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tabla.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Problema con el modelo de tabla");
+        }
+    }
+    
+    
+    private void Cargar_Informacion(){
+        try{
+            Object o[]=null;
+            List<Materiasprimas> listP = cMateriasprimas.findMateriasprimasEntities();
+            
+            for (int i=0; i< listP.size(); i++){
+                modelo.addRow(o);
+                modelo.setValueAt(listP.get(i).getMatCodigo(), i, 0);
+                modelo.setValueAt(listP.get(i).getMatNombre(), i, 1);
+                modelo.setValueAt(listP.get(i).getMatDescripcion(), i, 2);
+                modelo.setValueAt(listP.get(i).getMatUnidadMedida(), i, 3);
+                modelo.setValueAt(listP.get(i).getMatCatidad(), i, 4);
+                modelo.setValueAt(listP.get(i).getMatPrecioComprado(), i, 5);
+                modelo.setValueAt(listP.get(i).getProNIT().getProNIT(), i, 6);
+                
+            }                                            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("problema al cargar datos");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAgregar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables
 }
